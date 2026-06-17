@@ -1,6 +1,6 @@
 export function GET() {
   return new Response(
-    ["User-agent: *", "Allow: /", "Sitemap: https://kinktest.xyz/sitemap-index.xml"].join(
+    ["User-agent: *", "Allow: /", "Sitemap: https://kinktest.xyz/sitemap.xml"].join(
       "\n",
     ),
     {

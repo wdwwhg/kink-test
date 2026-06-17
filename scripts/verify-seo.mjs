@@ -45,10 +45,12 @@ for (const file of htmlFiles) {
 assert(htmlFiles.some((file) => file.endsWith("404.html")), "dist/404.html is missing.");
 
 const sitemap = await readFile(join(distDir, "sitemap-index.xml"), "utf8").catch(() => "");
+const sitemapXml = await readFile(join(distDir, "sitemap.xml"), "utf8").catch(() => "");
 const robots = await readFile(join(distDir, "robots.txt"), "utf8").catch(() => "");
 
 assert(sitemap.includes("sitemap-0.xml"), "sitemap-index.xml is missing sitemap-0.xml.");
-assert(robots.includes("Sitemap: https://kinktest.xyz/sitemap-index.xml"), "robots.txt is missing sitemap URL.");
+assert(sitemapXml.includes("https://kinktest.xyz/sitemap-0.xml"), "sitemap.xml is missing sitemap-0.xml.");
+assert(robots.includes("Sitemap: https://kinktest.xyz/sitemap.xml"), "robots.txt is missing sitemap URL.");
 
 if (failures.length > 0) {
   console.error(failures.map((failure) => `- ${failure}`).join("\n"));
