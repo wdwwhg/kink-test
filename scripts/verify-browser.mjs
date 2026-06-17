@@ -240,12 +240,22 @@ async function verifyViewport(client, width, height, label) {
           return false;
         }
       });
+    const allowedExternalHosts = new Set([
+      'www.googletagmanager.com',
+      'www.google-analytics.com',
+      'region1.google-analytics.com',
+      'analytics.google.com',
+    ]);
+    const unexpectedExternalResources = externalResources.filter((name) => {
+      const url = new URL(name);
+      return !allowedExternalHosts.has(url.hostname);
+    });
 
     return {
       resultVisible: !document.querySelector('[data-result-panel]').classList.contains('hidden'),
       radarPoints: document.querySelector('[data-radar-polygon]').getAttribute('points'),
       scoreCards: document.querySelectorAll('[data-score-list] > div').length,
-      externalResources,
+      unexpectedExternalResources,
     };
   })()`);
 
@@ -253,8 +263,8 @@ async function verifyViewport(client, width, height, label) {
   assert(resultState.radarPoints.length > 20, `${label}: radar chart did not render points`);
   assert(resultState.scoreCards === 6, `${label}: expected six score cards`);
   assert(
-    resultState.externalResources.length === 0,
-    `${label}: quiz loaded external resources: ${resultState.externalResources.join(", ")}`,
+    resultState.unexpectedExternalResources.length === 0,
+    `${label}: quiz loaded unexpected external resources: ${resultState.unexpectedExternalResources.join(", ")}`,
   );
   assert(client.consoleErrors.length === 0, `${label}: console errors: ${client.consoleErrors.join("; ")}`);
 }

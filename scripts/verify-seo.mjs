@@ -15,6 +15,8 @@ for (const file of htmlFiles) {
   const h1Count = count(html, /<h1[\s>]/g);
   const isHome = name === "index.html";
   const is404 = name === "404.html";
+  const hasGoogleAnalyticsTag = html.includes("https://www.googletagmanager.com/gtag/js?id=G-0WMYJDTP5G") &&
+    html.includes("gtag('config', 'G-0WMYJDTP5G')");
 
   assert(h1Count === 1, `${name}: expected exactly one H1, found ${h1Count}.`);
   assert(/<title>[^<]+<\/title>/.test(html), `${name}: missing title.`);
@@ -33,6 +35,7 @@ for (const file of htmlFiles) {
     count(html, /<script type="application\/ld\+json">/g) >= 2,
     `${name}: expected at least two JSON-LD blocks.`,
   );
+  assert(hasGoogleAnalyticsTag, `${name}: missing Google Analytics tag.`);
 
   if (!isHome && !is404) {
     assert(html.includes('href="/#test"'), `${name}: missing internal link back to the test.`);
