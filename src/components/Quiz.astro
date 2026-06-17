@@ -1,0 +1,330 @@
+---
+import { DIMENSIONS } from "../lib/quiz/scoring";
+import { QUIZ_QUESTIONS } from "../lib/quiz/questions";
+---
+
+<section
+  id="test"
+  class="border-y border-[color:var(--line)] bg-white py-12 sm:py-16"
+  aria-labelledby="quiz-title"
+>
+  <div class="mx-auto max-w-6xl px-4 sm:px-6">
+    <div class="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+      <div>
+        <p class="text-sm font-bold uppercase text-[color:var(--coral)]">Private browser-based quiz</p>
+        <h1 id="quiz-title" class="mt-3 text-3xl font-black leading-tight text-[color:var(--ink)] sm:text-4xl">
+          Take the 24-question kink test
+        </h1>
+        <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
+          Use a 1-5 scale to reflect on broad preferences. Your answers stay in your browser,
+          and the result is meant for adult self-knowledge and better conversations.
+        </p>
+        <div class="mt-6 grid gap-3 text-sm text-[color:var(--muted)] sm:grid-cols-2">
+          <div class="rounded-md border border-[color:var(--line)] bg-[color:var(--paper)] p-4">
+            <p class="font-bold text-[color:var(--ink)]">18+ educational use</p>
+            <p class="mt-1">Designed for consenting adults. No explicit images or graphic prompts.</p>
+          </div>
+          <div class="rounded-md border border-[color:var(--line)] bg-[color:var(--paper)] p-4">
+            <p class="font-bold text-[color:var(--ink)]">Local-only scoring</p>
+            <p class="mt-1">No accounts, saved reports, uploads, or hidden tracking in the quiz.</p>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="rounded-lg border border-[color:var(--line)] bg-[color:var(--panel)] p-4 shadow-[0_18px_60px_rgba(38,34,31,0.08)] sm:p-6"
+        data-quiz-root
+      >
+        <div data-quiz-panel>
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <p class="text-sm font-bold text-[color:var(--teal-dark)]" data-progress-label>
+              Question 1 of {QUIZ_QUESTIONS.length}
+            </p>
+            <p class="rounded-md bg-[rgba(15,118,110,0.1)] px-3 py-1 text-xs font-bold uppercase text-[color:var(--teal-dark)]">
+              Answers stay in your browser
+            </p>
+          </div>
+          <div class="mt-4 h-2 overflow-hidden rounded-full bg-[#ece3d9]" aria-hidden="true">
+            <div class="h-full rounded-full bg-[color:var(--teal)] transition-all" data-progress-bar style="width: 4.16%"></div>
+          </div>
+
+          <div class="mt-8 min-h-[18rem]" aria-live="polite">
+            <p class="text-xs font-bold uppercase text-[color:var(--gold)]" data-dimension-label>
+              {DIMENSIONS[0].label}
+            </p>
+            <h3 class="mt-3 text-2xl font-black leading-snug text-[color:var(--ink)]" data-question-prompt>
+              {QUIZ_QUESTIONS[0].prompt}
+            </h3>
+            <fieldset class="mt-8">
+              <legend class="sr-only">Choose how much you agree with this statement</legend>
+              <div class="grid grid-cols-5 gap-2" data-answer-options>
+                {
+                  [1, 2, 3, 4, 5].map((value) => (
+                    <button
+                      class="min-h-16 rounded-md border border-[color:var(--line)] bg-white px-2 py-3 text-center text-sm font-bold text-[color:var(--ink)] transition hover:border-[color:var(--teal)] hover:bg-[rgba(15,118,110,0.08)] focus-visible:outline-[color:var(--teal)]"
+                      type="button"
+                      data-answer-value={value}
+                    >
+                      <span class="block text-lg">{value}</span>
+                      <span class="block text-[0.72rem] font-semibold text-[color:var(--muted)]">
+                        {value === 1 ? "No" : value === 3 ? "Neutral" : value === 5 ? "Yes" : ""}
+                      </span>
+                    </button>
+                  ))
+                }
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="mt-6 flex items-center justify-between gap-3">
+            <button
+              type="button"
+              class="rounded-md border border-[color:var(--line)] px-4 py-2 text-sm font-bold text-[color:var(--muted)] disabled:cursor-not-allowed disabled:opacity-40"
+              data-prev-button
+              disabled
+            >
+              Back
+            </button>
+            <button
+              type="button"
+              class="rounded-md bg-[color:var(--teal)] px-5 py-2 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-45"
+              data-next-button
+              disabled
+            >
+              Next
+            </button>
+          </div>
+        </div>
+
+        <div class="hidden" data-result-panel>
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <p class="text-sm font-bold uppercase text-[color:var(--coral)]">Your reflection map</p>
+            <button
+              type="button"
+              class="rounded-md border border-[color:var(--line)] px-4 py-2 text-sm font-bold text-[color:var(--muted)]"
+              data-reset-button
+            >
+              Retake
+            </button>
+          </div>
+          <div class="mt-6 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+            <svg
+              viewBox="0 0 320 320"
+              class="mx-auto h-auto w-full max-w-[320px]"
+              role="img"
+              aria-labelledby="radar-title radar-desc"
+            >
+              <title id="radar-title">Kink test dimension radar chart</title>
+              <desc id="radar-desc">A six-axis chart showing your broad preference dimensions.</desc>
+              <g fill="none" stroke="#ded5ca" stroke-width="1">
+                <polygon points="160,40 264,100 264,220 160,280 56,220 56,100"></polygon>
+                <polygon points="160,80 229,120 229,200 160,240 91,200 91,120"></polygon>
+                <polygon points="160,120 195,140 195,180 160,200 125,180 125,140"></polygon>
+                <line x1="160" y1="160" x2="160" y2="40"></line>
+                <line x1="160" y1="160" x2="264" y2="100"></line>
+                <line x1="160" y1="160" x2="264" y2="220"></line>
+                <line x1="160" y1="160" x2="160" y2="280"></line>
+                <line x1="160" y1="160" x2="56" y2="220"></line>
+                <line x1="160" y1="160" x2="56" y2="100"></line>
+              </g>
+              <polygon
+                data-radar-polygon
+                points=""
+                fill="rgba(15,118,110,0.24)"
+                stroke="#0f766e"
+                stroke-width="3"
+              ></polygon>
+              <g data-radar-dots></g>
+            </svg>
+            <div>
+              <h3 class="text-2xl font-black text-[color:var(--ink)]">Your strongest themes</h3>
+              <p class="mt-3 leading-7 text-[color:var(--muted)]">
+                These scores are not labels or instructions. They are prompts for adult reflection:
+                what feels worth discussing, what needs a boundary, and what should stay private.
+              </p>
+              <div class="mt-5 grid gap-3" data-top-dimensions></div>
+            </div>
+          </div>
+          <div class="mt-8 grid gap-3 sm:grid-cols-2" data-score-list></div>
+          <div class="mt-8 rounded-md border border-[color:var(--line)] bg-[color:var(--paper)] p-5">
+            <p class="font-bold text-[color:var(--ink)]">Conversation prompt</p>
+            <p class="mt-2 leading-7 text-[color:var(--muted)]">
+              “Here are the themes I noticed. I am curious about some of them, unsure about others,
+              and I want us to talk about boundaries before trying anything.”
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { calculateQuizResult, DIMENSIONS, type AnswerMap, type DimensionScore } from "../lib/quiz/scoring";
+  import { QUIZ_QUESTIONS } from "../lib/quiz/questions";
+
+  const root = document.querySelector<HTMLElement>("[data-quiz-root]");
+  const quizPanel = root?.querySelector<HTMLElement>("[data-quiz-panel]");
+  const resultPanel = root?.querySelector<HTMLElement>("[data-result-panel]");
+  const progressLabel = root?.querySelector<HTMLElement>("[data-progress-label]");
+  const progressBar = root?.querySelector<HTMLElement>("[data-progress-bar]");
+  const dimensionLabel = root?.querySelector<HTMLElement>("[data-dimension-label]");
+  const questionPrompt = root?.querySelector<HTMLElement>("[data-question-prompt]");
+  const answerButtons = Array.from(root?.querySelectorAll<HTMLButtonElement>("[data-answer-value]") ?? []);
+  const prevButton = root?.querySelector<HTMLButtonElement>("[data-prev-button]");
+  const nextButton = root?.querySelector<HTMLButtonElement>("[data-next-button]");
+  const resetButton = root?.querySelector<HTMLButtonElement>("[data-reset-button]");
+  const radarPolygon = root?.querySelector<SVGPolygonElement>("[data-radar-polygon]");
+  const radarDots = root?.querySelector<SVGGElement>("[data-radar-dots]");
+  const topDimensions = root?.querySelector<HTMLElement>("[data-top-dimensions]");
+  const scoreList = root?.querySelector<HTMLElement>("[data-score-list]");
+
+  let currentIndex = 0;
+  const answers: AnswerMap = {};
+
+  function getQuestion() {
+    return QUIZ_QUESTIONS[currentIndex];
+  }
+
+  function renderQuestion() {
+    const question = getQuestion();
+    const dimension = DIMENSIONS.find((item) => item.id === question.dimension);
+    const answer = answers[question.id];
+    const progress = ((currentIndex + 1) / QUIZ_QUESTIONS.length) * 100;
+
+    if (progressLabel) {
+      progressLabel.textContent = `Question ${currentIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+    }
+    if (progressBar) {
+      progressBar.style.width = `${progress}%`;
+    }
+    if (dimensionLabel) {
+      dimensionLabel.textContent = dimension?.label ?? "";
+    }
+    if (questionPrompt) {
+      questionPrompt.textContent = question.prompt;
+    }
+    if (prevButton) {
+      prevButton.disabled = currentIndex === 0;
+    }
+    if (nextButton) {
+      nextButton.disabled = answer === undefined;
+      nextButton.textContent = currentIndex === QUIZ_QUESTIONS.length - 1 ? "See results" : "Next";
+    }
+
+    for (const button of answerButtons) {
+      const value = Number(button.dataset.answerValue);
+      const selected = answer === value;
+      button.setAttribute("aria-pressed", String(selected));
+      button.classList.toggle("border-[color:var(--teal)]", selected);
+      button.classList.toggle("bg-[rgba(15,118,110,0.12)]", selected);
+    }
+  }
+
+  function pointForScore(index: number, score: number) {
+    const angle = -Math.PI / 2 + (index * 2 * Math.PI) / DIMENSIONS.length;
+    const radius = (score / 100) * 120;
+    const x = 160 + Math.cos(angle) * radius;
+    const y = 160 + Math.sin(angle) * radius;
+
+    return `${x.toFixed(1)},${y.toFixed(1)}`;
+  }
+
+  function scoreTone(score: number) {
+    if (score >= 75) {
+      return "Strong theme";
+    }
+    if (score >= 55) {
+      return "Open curiosity";
+    }
+    if (score >= 35) {
+      return "Mixed or situational";
+    }
+    return "Lower priority";
+  }
+
+  function renderResults() {
+    const result = calculateQuizResult(QUIZ_QUESTIONS, answers);
+    const points = result.scores.map((score, index) => pointForScore(index, score.score));
+
+    if (radarPolygon) {
+      radarPolygon.setAttribute("points", points.join(" "));
+    }
+    if (radarDots) {
+      radarDots.innerHTML = result.scores
+        .map((score, index) => {
+          const [x, y] = pointForScore(index, score.score).split(",");
+          return `<circle cx="${x}" cy="${y}" r="4.5" fill="#d45d4c"><title>${score.label}: ${score.score}</title></circle>`;
+        })
+        .join("");
+    }
+    if (topDimensions) {
+      topDimensions.innerHTML = result.topDimensions
+        .map((dimensionId) => {
+          const dimension = DIMENSIONS.find((item) => item.id === dimensionId);
+          const score = result.scores.find((item) => item.id === dimensionId);
+
+          return `<div class="rounded-md border border-[color:var(--line)] bg-white p-4">
+            <p class="font-bold text-[color:var(--ink)]">${dimension?.label ?? ""}</p>
+            <p class="mt-1 text-sm leading-6 text-[color:var(--muted)]">${dimension?.description ?? ""}</p>
+            <p class="mt-2 text-xs font-bold uppercase text-[color:var(--teal-dark)]">${score?.score ?? 0}/100</p>
+          </div>`;
+        })
+        .join("");
+    }
+    if (scoreList) {
+      scoreList.innerHTML = result.scores.map(renderScore).join("");
+    }
+    quizPanel?.classList.add("hidden");
+    resultPanel?.classList.remove("hidden");
+    resultPanel?.focus();
+  }
+
+  function renderScore(score: DimensionScore) {
+    return `<div class="rounded-md border border-[color:var(--line)] bg-white p-4">
+      <div class="flex items-center justify-between gap-3">
+        <p class="font-bold text-[color:var(--ink)]">${score.label}</p>
+        <p class="text-sm font-black text-[color:var(--teal-dark)]">${score.score}</p>
+      </div>
+      <div class="mt-3 h-2 overflow-hidden rounded-full bg-[#ece3d9]">
+        <div class="h-full rounded-full bg-[color:var(--teal)]" style="width: ${score.score}%"></div>
+      </div>
+      <p class="mt-2 text-sm text-[color:var(--muted)]">${scoreTone(score.score)}</p>
+    </div>`;
+  }
+
+  for (const button of answerButtons) {
+    button.addEventListener("click", () => {
+      const question = getQuestion();
+      answers[question.id] = Number(button.dataset.answerValue) as AnswerMap[string];
+      renderQuestion();
+    });
+  }
+
+  prevButton?.addEventListener("click", () => {
+    currentIndex = Math.max(0, currentIndex - 1);
+    renderQuestion();
+  });
+
+  nextButton?.addEventListener("click", () => {
+    if (currentIndex === QUIZ_QUESTIONS.length - 1) {
+      renderResults();
+      return;
+    }
+
+    currentIndex += 1;
+    renderQuestion();
+  });
+
+  resetButton?.addEventListener("click", () => {
+    for (const key of Object.keys(answers)) {
+      delete answers[key];
+    }
+    currentIndex = 0;
+    resultPanel?.classList.add("hidden");
+    quizPanel?.classList.remove("hidden");
+    renderQuestion();
+  });
+
+  renderQuestion();
+</script>

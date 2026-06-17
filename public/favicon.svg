@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Kink Test favicon</title>
+  <rect width="64" height="64" rx="8" fill="#0f766e"/>
+  <path d="M32 12 49.3 22v20L32 52 14.7 42V22L32 12Z" fill="none" stroke="#fffaf4" stroke-width="4"/>
+  <path d="M32 21 42 27v11L32 44 22 38V27l10-6Z" fill="#d45d4c"/>
+</svg>

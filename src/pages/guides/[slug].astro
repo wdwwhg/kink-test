@@ -1,0 +1,99 @@
+---
+import { getCollection, render } from "astro:content";
+import SiteFooter from "../../components/SiteFooter.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const guides = await getCollection("guides");
+
+  return guides.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const canonicalPath = `/guides/${entry.slug}/`;
+const canonical = new URL(canonicalPath, Astro.site ?? "https://kinktest.xyz").toString();
+const title = `${entry.data.title} | Kink Test Guide`;
+const description = entry.data.description;
+const pubDate = entry.data.pubDate.toISOString();
+const modifiedDate = (entry.data.updatedDate ?? entry.data.pubDate).toISOString();
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: entry.data.title,
+    description,
+    datePublished: pubDate,
+    dateModified: modifiedDate,
+    author: {
+      "@type": "Organization",
+      name: "Kink Test",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Kink Test",
+    },
+    mainEntityOfPage: canonical,
+    inLanguage: "en-US",
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Kink Test",
+        item: "https://kinktest.xyz/",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: entry.data.title,
+        item: canonical,
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+  <SiteHeader />
+  <main id="main">
+    <article class="bg-[color:var(--paper)] py-12 sm:py-16">
+      <div class="mx-auto grid max-w-6xl gap-10 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_18rem]">
+        <div>
+          <a class="text-sm font-bold text-[color:var(--teal-dark)] hover:underline" href="/">Take the kink test</a>
+          <p class="mt-6 text-sm font-bold uppercase text-[color:var(--coral)]">{entry.data.category}</p>
+          <h1 class="mt-3 max-w-3xl text-4xl font-black leading-tight text-[color:var(--ink)]">
+            {entry.data.title}
+          </h1>
+          <p class="mt-5 max-w-3xl text-xl leading-8 text-[color:var(--muted)]">{description}</p>
+          <div class="content-prose mt-10 max-w-3xl rounded-md border border-[color:var(--line)] bg-white p-6 sm:p-8">
+            <Content />
+          </div>
+        </div>
+        <aside class="lg:pt-32">
+          <div class="sticky top-6 rounded-md border border-[color:var(--line)] bg-white p-5">
+            <p class="font-bold text-[color:var(--ink)]">Before you explore</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">
+              The quiz is private, educational, and designed for adults. Use it to prepare better
+              conversations, not to bypass consent.
+            </p>
+            <a
+              href="/#test"
+              class="mt-5 inline-flex rounded-md bg-[color:var(--teal)] px-4 py-2 text-sm font-bold text-white"
+            >
+              Start the test
+            </a>
+          </div>
+        </aside>
+      </div>
+    </article>
+  </main>
+  <SiteFooter />
+</BaseLayout>

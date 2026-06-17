@@ -1,0 +1,155 @@
+---
+import { getCollection } from "astro:content";
+import Quiz from "../components/Quiz.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const title = "Kink Test - Private 24-Question Adult Self-Reflection Quiz";
+const description =
+  "Take a private, browser-based kink test for adults. Explore broad preference themes, boundaries, consent, aftercare, and communication without uploading answers.";
+
+const guides = (await getCollection("guides"))
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 8);
+
+const siteUrl = "https://kinktest.xyz/";
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Kink Test",
+    url: siteUrl,
+    inLanguage: "en-US",
+    description,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "Kink Test",
+    url: siteUrl,
+    applicationCategory: "LifestyleApplication",
+    operatingSystem: "Any",
+    isAccessibleForFree: true,
+    audience: {
+      "@type": "PeopleAudience",
+      suggestedMinAge: 18,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Kink Test",
+        item: siteUrl,
+      },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <SiteHeader />
+  <main id="main">
+    <Quiz />
+
+    <section class="bg-[color:var(--paper)] py-14 sm:py-16" aria-labelledby="why-title">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr]">
+        <div>
+          <p class="text-sm font-bold uppercase text-[color:var(--coral)]">Built for safer reflection</p>
+          <h2 id="why-title" class="mt-3 text-3xl font-black leading-tight text-[color:var(--ink)]">
+            A kink test should start conversations, not make decisions for you.
+          </h2>
+        </div>
+        <div class="grid gap-4 sm:grid-cols-3">
+          <div class="rounded-md border border-[color:var(--line)] bg-white p-5">
+            <p class="font-bold text-[color:var(--ink)]">Consent first</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">
+              Results point toward topics to discuss, not permission to skip negotiation.
+            </p>
+          </div>
+          <div class="rounded-md border border-[color:var(--line)] bg-white p-5">
+            <p class="font-bold text-[color:var(--ink)]">Broad dimensions</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">
+              Six non-graphic themes keep the test useful in public and private settings.
+            </p>
+          </div>
+          <div class="rounded-md border border-[color:var(--line)] bg-white p-5">
+            <p class="font-bold text-[color:var(--ink)]">No upload</p>
+            <p class="mt-2 text-sm leading-6 text-[color:var(--muted)]">
+              Scoring runs locally, so your answers stay in your browser.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-14 sm:py-16" aria-labelledby="guides-title">
+      <div class="mx-auto max-w-6xl px-4 sm:px-6">
+        <div class="max-w-3xl">
+          <p class="text-sm font-bold uppercase text-[color:var(--teal-dark)]">Kink test guides</p>
+          <h2 id="guides-title" class="mt-3 text-3xl font-black leading-tight text-[color:var(--ink)]">
+            Learn how to read your results with care.
+          </h2>
+          <p class="mt-4 text-lg leading-8 text-[color:var(--muted)]">
+            These articles support the quiz with practical context about boundaries, privacy,
+            communication, and safer adult exploration.
+          </p>
+        </div>
+        <div class="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            guides.map((guide) => (
+              <a
+                href={`/guides/${guide.slug}/`}
+                class="group rounded-md border border-[color:var(--line)] bg-[color:var(--paper)] p-5 transition hover:border-[color:var(--teal)] hover:bg-white"
+              >
+                <p class="text-xs font-bold uppercase text-[color:var(--coral)]">{guide.data.category}</p>
+                <h3 class="mt-3 text-lg font-black leading-snug text-[color:var(--ink)] group-hover:text-[color:var(--teal-dark)]">
+                  {guide.data.title}
+                </h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{guide.data.description}</p>
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-[color:var(--paper)] py-14 sm:py-16" aria-labelledby="faq-title">
+      <div class="mx-auto max-w-4xl px-4 sm:px-6">
+        <h2 id="faq-title" class="text-3xl font-black text-[color:var(--ink)]">Kink test FAQ</h2>
+        <div class="mt-8 grid gap-4">
+          <details class="rounded-md border border-[color:var(--line)] bg-white p-5">
+            <summary class="cursor-pointer font-bold text-[color:var(--ink)]">Is this kink test private?</summary>
+            <p class="mt-3 leading-7 text-[color:var(--muted)]">
+              Yes. The quiz calculates results in your browser and does not ask for an account, email,
+              or saved profile.
+            </p>
+          </details>
+          <details class="rounded-md border border-[color:var(--line)] bg-white p-5">
+            <summary class="cursor-pointer font-bold text-[color:var(--ink)]">Can the result tell me what to try?</summary>
+            <p class="mt-3 leading-7 text-[color:var(--muted)]">
+              No test can replace consent, boundaries, research, or safer-practice conversations.
+              Treat the result as a reflection map, not a checklist.
+            </p>
+          </details>
+          <details class="rounded-md border border-[color:var(--line)] bg-white p-5">
+            <summary class="cursor-pointer font-bold text-[color:var(--ink)]">Who is this for?</summary>
+            <p class="mt-3 leading-7 text-[color:var(--muted)]">
+              It is for adults 18+ who want a non-graphic way to think about broad preference themes.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

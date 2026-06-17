@@ -1,0 +1,31 @@
+---
+const links = [
+  { href: "/", label: "Test" },
+  { href: "/guides/what-is-a-kink-test/", label: "Guide" },
+  { href: "/guides/online-kink-test-privacy/", label: "Privacy" },
+];
+---
+
+<header class="border-b border-[color:var(--line)] bg-[rgba(255,250,244,0.88)] backdrop-blur">
+  <nav
+    class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6"
+    aria-label="Primary navigation"
+  >
+    <a href="/" class="flex items-center gap-3 text-sm font-black uppercase tracking-normal text-[color:var(--ink)]">
+      <span class="grid h-9 w-9 place-items-center rounded-md bg-[color:var(--teal)] text-white">KT</span>
+      <span>Kink Test</span>
+    </a>
+    <div class="flex items-center gap-1">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="rounded-md px-3 py-2 text-sm font-semibold text-[color:var(--muted)] hover:bg-white hover:text-[color:var(--teal-dark)]"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </nav>
+</header>
