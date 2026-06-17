@@ -8,6 +8,7 @@ interface Props {
   image?: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
+  robots?: string;
 }
 
 const {
@@ -17,6 +18,7 @@ const {
   image = "/og-image.svg",
   jsonLd = [],
   bodyClass = "",
+  robots = "index, follow, max-image-preview:large",
 } = Astro.props;
 
 const site = Astro.site ?? new URL("https://kinktest.xyz");
@@ -34,7 +36,7 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content={robots} />
     <meta name="theme-color" content="#fffaf4" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />

@@ -5,8 +5,8 @@ const distDir = "dist";
 const failures = [];
 const htmlFiles = await findHtmlFiles(distDir);
 
-if (htmlFiles.length !== 9) {
-  failures.push(`Expected 9 built HTML pages, found ${htmlFiles.length}.`);
+if (htmlFiles.length !== 10) {
+  failures.push(`Expected 10 built HTML pages including 404.html, found ${htmlFiles.length}.`);
 }
 
 for (const file of htmlFiles) {
@@ -14,21 +14,32 @@ for (const file of htmlFiles) {
   const name = relative(distDir, file).replaceAll("\\", "/");
   const h1Count = count(html, /<h1[\s>]/g);
   const isHome = name === "index.html";
+  const is404 = name === "404.html";
 
   assert(h1Count === 1, `${name}: expected exactly one H1, found ${h1Count}.`);
   assert(/<title>[^<]+<\/title>/.test(html), `${name}: missing title.`);
   assert(/<meta name="description" content="[^"]+"/.test(html), `${name}: missing meta description.`);
   assert(/<link rel="canonical" href="https:\/\/kinktest\.xyz\/[^"]*"/.test(html), `${name}: missing canonical.`);
   assert(/<meta property="og:image" content="https:\/\/kinktest\.xyz\/og-image\.svg"/.test(html), `${name}: missing OG image.`);
+  if (is404) {
+    assert(/<meta name="robots" content="noindex, nofollow"/.test(html), `${name}: 404 page must be noindex.`);
+  } else {
+    assert(
+      /<meta name="robots" content="index, follow, max-image-preview:large"/.test(html),
+      `${name}: missing indexable robots meta.`,
+    );
+  }
   assert(
     count(html, /<script type="application\/ld\+json">/g) >= 2,
     `${name}: expected at least two JSON-LD blocks.`,
   );
 
-  if (!isHome) {
+  if (!isHome && !is404) {
     assert(html.includes('href="/#test"'), `${name}: missing internal link back to the test.`);
   }
 }
+
+assert(htmlFiles.some((file) => file.endsWith("404.html")), "dist/404.html is missing.");
 
 const sitemap = await readFile(join(distDir, "sitemap-index.xml"), "utf8").catch(() => "");
 const robots = await readFile(join(distDir, "robots.txt"), "utf8").catch(() => "");
@@ -51,7 +62,7 @@ async function findHtmlFiles(dir) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) {
       files.push(...(await findHtmlFiles(path)));
-    } else if (entry.name === "index.html") {
+    } else if (entry.name === "index.html" || entry.name === "404.html") {
       files.push(path);
     }
   }
