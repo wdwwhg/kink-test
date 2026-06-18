@@ -210,6 +210,11 @@ async function verifyViewport(client, width, height, label) {
     canonical: document.querySelector('link[rel="canonical"]')?.href,
     jsonLdCount: document.querySelectorAll('script[type="application/ld+json"]').length,
     answerButtons: document.querySelectorAll('[data-answer-value]').length,
+    imageCount: document.images.length,
+    missingAltImages: Array.from(document.images).filter((image) => !image.hasAttribute('alt')).length,
+    emptyAltImages: Array.from(document.images).filter((image) => image.alt === '').length,
+    describedImages: Array.from(document.images).filter((image) => image.alt.length > 0).length,
+    brokenImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
     overlay: Boolean(document.querySelector('.vite-error-overlay, #webpack-dev-server-client-overlay')),
   }))()`);
 
@@ -219,6 +224,11 @@ async function verifyViewport(client, width, height, label) {
   assert(pageState.canonical === "https://kinktest.xyz/", `${label}: canonical URL mismatch`);
   assert(pageState.jsonLdCount >= 3, `${label}: expected homepage JSON-LD blocks`);
   assert(pageState.answerButtons === 5, `${label}: answer buttons did not render`);
+  assert(pageState.imageCount === 9, `${label}: expected one primary image and eight guide thumbnails`);
+  assert(pageState.missingAltImages === 0, `${label}: found images without alt attributes`);
+  assert(pageState.emptyAltImages === 8, `${label}: guide thumbnails should use empty alt text`);
+  assert(pageState.describedImages === 1, `${label}: homepage primary image needs descriptive alt text`);
+  assert(pageState.brokenImages === 0, `${label}: one or more homepage images failed to load`);
   assert(!pageState.overlay, `${label}: dev error overlay detected`);
 
   const resultState = await client.evaluate(`(async () => {
@@ -254,6 +264,7 @@ async function verifyViewport(client, width, height, label) {
     return {
       resultVisible: !document.querySelector('[data-result-panel]').classList.contains('hidden'),
       radarPoints: document.querySelector('[data-radar-polygon]').getAttribute('points'),
+      radarDescription: document.querySelector('[data-radar-description]').textContent,
       scoreCards: document.querySelectorAll('[data-score-list] > div').length,
       unexpectedExternalResources,
     };
@@ -261,12 +272,43 @@ async function verifyViewport(client, width, height, label) {
 
   assert(resultState.resultVisible, `${label}: result panel did not become visible`);
   assert(resultState.radarPoints.length > 20, `${label}: radar chart did not render points`);
+  assert(
+    (resultState.radarDescription.match(/out of 100/g) ?? []).length === 6,
+    `${label}: radar description does not include all six scores`,
+  );
   assert(resultState.scoreCards === 6, `${label}: expected six score cards`);
   assert(
     resultState.unexpectedExternalResources.length === 0,
     `${label}: quiz loaded unexpected external resources: ${resultState.unexpectedExternalResources.join(", ")}`,
   );
   assert(client.consoleErrors.length === 0, `${label}: console errors: ${client.consoleErrors.join("; ")}`);
+
+  const guideLoaded = client.waitFor("Page.loadEventFired");
+  await client.send("Page.navigate", { url: `${appUrl}guides/what-is-a-kink-test/` });
+  await guideLoaded;
+  await delay(300);
+
+  const guideState = await client.evaluate(`(() => ({
+    canonical: document.querySelector('link[rel="canonical"]')?.href,
+    imageCount: document.images.length,
+    missingAltImages: Array.from(document.images).filter((image) => !image.hasAttribute('alt')).length,
+    emptyAltImages: Array.from(document.images).filter((image) => image.alt === '').length,
+    brokenImages: Array.from(document.images).filter((image) => image.complete && image.naturalWidth === 0).length,
+    primaryAlt: document.images[0]?.alt,
+  }))()`);
+
+  assert(
+    guideState.canonical === "https://kinktest.xyz/guides/what-is-a-kink-test/",
+    `${label}: guide canonical URL mismatch`,
+  );
+  assert(guideState.imageCount === 1, `${label}: guide should render one primary image`);
+  assert(guideState.missingAltImages === 0, `${label}: guide image is missing an alt attribute`);
+  assert(guideState.emptyAltImages === 0, `${label}: guide primary image needs descriptive alt text`);
+  assert(guideState.brokenImages === 0, `${label}: guide image failed to load`);
+  assert(
+    guideState.primaryAlt.includes("adult preferences"),
+    `${label}: guide primary image alt text is not descriptive`,
+  );
 }
 
 function assert(condition, message) {

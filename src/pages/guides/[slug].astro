@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from "astro:content";
+import ContentImage from "../../components/ContentImage.astro";
 import SiteFooter from "../../components/SiteFooter.astro";
 import SiteHeader from "../../components/SiteHeader.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
@@ -19,6 +20,7 @@ const canonicalPath = `/guides/${entry.slug}/`;
 const canonical = new URL(canonicalPath, Astro.site ?? "https://kinktest.xyz").toString();
 const title = `${entry.data.title} | Kink Test Guide`;
 const description = entry.data.description;
+const imageUrl = new URL(entry.data.image.socialSrc, Astro.site ?? "https://kinktest.xyz").toString();
 const pubDate = entry.data.pubDate.toISOString();
 const modifiedDate = (entry.data.updatedDate ?? entry.data.pubDate).toISOString();
 const jsonLd = [
@@ -38,6 +40,7 @@ const jsonLd = [
       name: "Kink Test",
     },
     mainEntityOfPage: canonical,
+    image: imageUrl,
     inLanguage: "en-US",
   },
   {
@@ -61,7 +64,14 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} canonicalPath={canonicalPath} jsonLd={jsonLd}>
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalPath={canonicalPath}
+  image={entry.data.image.socialSrc}
+  imageAlt={entry.data.image.alt}
+  jsonLd={jsonLd}
+>
   <SiteHeader />
   <main id="main">
     <article class="bg-[color:var(--paper)] py-12 sm:py-16">
@@ -73,6 +83,13 @@ const jsonLd = [
             {entry.data.title}
           </h1>
           <p class="mt-5 max-w-3xl text-xl leading-8 text-[color:var(--muted)]">{description}</p>
+          <ContentImage
+            src={entry.data.image.src}
+            alt={entry.data.image.alt}
+            loading="eager"
+            fetchpriority="high"
+            class="mt-8 h-auto w-full max-w-3xl rounded-lg border border-[color:var(--line)] bg-white"
+          />
           <div class="content-prose mt-10 max-w-3xl rounded-md border border-[color:var(--line)] bg-white p-6 sm:p-8">
             <Content />
           </div>

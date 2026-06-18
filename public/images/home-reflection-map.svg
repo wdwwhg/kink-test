@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fffaf4"/>
+  <rect x="52" y="42" width="1096" height="546" rx="28" fill="#ffffff" stroke="#ded5ca" stroke-width="4"/>
+  <circle cx="600" cy="315" r="194" fill="#f7eee4"/>
+  <g transform="translate(600 315)" fill="none" stroke-linejoin="round">
+    <polygon points="0,-166 144,-83 144,83 0,166 -144,83 -144,-83" stroke="#ded5ca" stroke-width="5"/>
+    <polygon points="0,-112 97,-56 97,56 0,112 -97,56 -97,-56" stroke="#ded5ca" stroke-width="4"/>
+    <path d="M0-166V166M-144-83L144 83M144-83L-144 83" stroke="#e9dfd4" stroke-width="3"/>
+    <polygon points="0,-124 113,-65 86,50 0,105 -92,53 -108,-62" fill="#0f766e" fill-opacity=".24" stroke="#0f766e" stroke-width="7"/>
+    <g fill="#d45d4c" stroke="none">
+      <circle cy="-124" r="9"/><circle cx="113" cy="-65" r="9"/><circle cx="86" cy="50" r="9"/>
+      <circle cy="105" r="9"/><circle cx="-92" cy="53" r="9"/><circle cx="-108" cy="-62" r="9"/>
+    </g>
+  </g>
+  <g transform="translate(158 154)">
+    <rect width="156" height="124" rx="24" fill="#e3f1ef" stroke="#0f766e" stroke-width="4"/>
+    <path d="M54 60V45a24 24 0 0 1 48 0v15" fill="none" stroke="#0f766e" stroke-width="9" stroke-linecap="round"/>
+    <rect x="42" y="58" width="72" height="50" rx="12" fill="#0f766e"/>
+    <circle cx="78" cy="82" r="7" fill="#fffaf4"/>
+  </g>
+  <g transform="translate(888 128)" fill="none" stroke="#d45d4c" stroke-width="5">
+    <path d="M0 28C0 12 13 0 29 0h150c16 0 29 12 29 28v61c0 16-13 28-29 28H87l-38 31 9-31H29C13 117 0 105 0 89Z" fill="#fff2ef"/>
+    <circle cx="68" cy="59" r="8" fill="#d45d4c" stroke="none"/>
+    <circle cx="104" cy="59" r="8" fill="#d45d4c" stroke="none"/>
+    <circle cx="140" cy="59" r="8" fill="#d45d4c" stroke="none"/>
+  </g>
+  <g transform="translate(870 416)" fill="none" stroke="#b78a1f" stroke-width="7" stroke-linecap="round">
+    <circle cx="74" cy="70" r="66" fill="#fff7d8"/>
+    <path d="M41 72l22 22 47-51"/>
+  </g>
+  <g transform="translate(132 420)" fill="none" stroke="#0f766e" stroke-width="5">
+    <circle cx="58" cy="58" r="52" fill="#e3f1ef"/>
+    <circle cx="134" cy="58" r="52" fill="#fff2ef" stroke="#d45d4c"/>
+    <path d="M90 28c20 15 28 45 0 61" stroke="#665f57" stroke-dasharray="8 8"/>
+  </g>
+</svg>

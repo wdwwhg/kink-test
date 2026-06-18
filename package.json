@@ -8,6 +8,8 @@
     "build": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro check && cross-env ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "cross-env ASTRO_TELEMETRY_DISABLED=1 astro preview",
     "test": "vitest run",
+    "images:generate": "node scripts/generate-images.mjs",
+    "images:check": "node scripts/check-images.mjs",
     "verify:seo": "node scripts/verify-seo.mjs",
     "verify:browser": "node scripts/verify-browser.mjs",
     "test:watch": "vitest"
@@ -21,6 +23,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
     "cross-env": "^10.1.0",
+    "sharp": "^0.34.5",
     "typescript": "^5.8.3",
     "vitest": "^3.2.4"
   }

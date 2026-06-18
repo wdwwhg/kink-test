@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fffaf4"/>
+  <rect x="52" y="42" width="1096" height="546" rx="28" fill="#ffffff" stroke="#ded5ca" stroke-width="4"/>
+  <g transform="translate(600 315)" fill="none">
+    <ellipse rx="430" ry="220" fill="#f7eee4" stroke="#ded5ca" stroke-width="5"/>
+    <ellipse rx="330" ry="166" fill="#ffffff" stroke="#b78a1f" stroke-width="5" stroke-dasharray="16 13"/>
+    <ellipse rx="220" ry="112" fill="#e3f1ef" stroke="#0f766e" stroke-width="6"/>
+  </g>
+  <g transform="translate(212 265)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="0" cy="0" r="56" fill="#e3f1ef" stroke="#0f766e" stroke-width="5"/>
+    <path d="M-25 1l18 19 35-42" stroke="#0f766e" stroke-width="9"/>
+  </g>
+  <g transform="translate(406 164)" fill="none">
+    <circle r="56" fill="#fff7d8" stroke="#b78a1f" stroke-width="5"/>
+    <path d="M-24 0h48" stroke="#b78a1f" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(600 315)" fill="none">
+    <circle r="62" fill="#ffffff" stroke="#665f57" stroke-width="6"/>
+    <path d="M-18-26v52M18-26v52" stroke="#665f57" stroke-width="10" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(794 164)" fill="none">
+    <circle r="56" fill="#fff2ef" stroke="#d45d4c" stroke-width="5"/>
+    <rect x="-24" y="-24" width="48" height="48" rx="5" fill="#d45d4c" stroke="none"/>
+  </g>
+  <g transform="translate(988 265)" fill="none" stroke-linecap="round">
+    <circle r="56" fill="#fff2ef" stroke="#d45d4c" stroke-width="5"/>
+    <path d="M-22-22l44 44M22-22l-44 44" stroke="#d45d4c" stroke-width="9"/>
+  </g>
+  <g transform="translate(600 487)">
+    <circle cx="-96" r="13" fill="#0f766e"/><circle cx="-48" r="13" fill="#b78a1f"/>
+    <circle r="13" fill="#665f57"/><circle cx="48" r="13" fill="#d45d4c"/><circle cx="96" r="13" fill="#d45d4c"/>
+  </g>
+</svg>

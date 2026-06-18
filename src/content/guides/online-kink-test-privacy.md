@@ -4,6 +4,10 @@ description: "Learn why private browser-based scoring matters for kink tests and
 category: "Privacy"
 pubDate: "2026-06-17"
 order: 6
+image:
+  src: "/images/online-kink-test-privacy.svg"
+  socialSrc: "/images/online-kink-test-privacy.png"
+  alt: "Browser-based kink test scoring locally beside a privacy lock, no-account symbol, and no-upload arrow."
 ---
 
 Privacy matters because kink test answers can feel personal even when the questions are broad. Before using any online test, look for signs that the site respects sensitive reflection.

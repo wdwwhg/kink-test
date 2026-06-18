@@ -4,6 +4,10 @@ description: "Simple, non-graphic definitions for consent, boundaries, aftercare
 category: "Vocabulary"
 pubDate: "2026-06-17"
 order: 7
+image:
+  src: "/images/beginner-friendly-kink-terms.svg"
+  socialSrc: "/images/beginner-friendly-kink-terms.png"
+  alt: "Glossary cards for consent, boundaries, negotiation, roles, check-ins, and aftercare."
 ---
 
 Kink vocabulary can feel overwhelming. You do not need to memorize every term before taking a kink test. A few simple definitions can make results easier to read and safer to discuss.

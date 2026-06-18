@@ -4,6 +4,10 @@ description: "Learn how a broad kink test differs from a BDSM test, and when eac
 category: "Comparison"
 pubDate: "2026-06-17"
 order: 2
+image:
+  src: "/images/kink-test-vs-bdsm-test.svg"
+  socialSrc: "/images/kink-test-vs-bdsm-test.png"
+  alt: "Side-by-side diagrams comparing broad kink test themes with more specific BDSM roles and vocabulary."
 ---
 
 People often search for a kink test and a BDSM test as if they are the same thing. They overlap, but the focus can be different. A BDSM test usually centers specific roles, practices, or community labels. A kink test can be broader: it may explore curiosity, communication style, boundaries, fantasy, sensation, and emotional safety without pushing a person toward a specific label.

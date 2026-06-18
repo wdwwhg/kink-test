@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import ContentImage from "../components/ContentImage.astro";
 import Quiz from "../components/Quiz.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import SiteHeader from "../components/SiteHeader.astro";
@@ -8,12 +9,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 const title = "Kink Test - Private 24-Question Adult Self-Reflection Quiz";
 const description =
   "Take a private, browser-based kink test for adults. Explore broad preference themes, boundaries, consent, aftercare, and communication without uploading answers.";
+const image = {
+  src: "/images/home-reflection-map.svg",
+  socialSrc: "/images/home-reflection-map.png",
+  alt: "Six-axis kink test reflection map surrounded by symbols for privacy, consent, boundaries, and conversation.",
+};
 
 const guides = (await getCollection("guides"))
   .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 8);
 
 const siteUrl = "https://kinktest.xyz/";
+const imageUrl = new URL(image.socialSrc, siteUrl).toString();
 const jsonLd = [
   {
     "@context": "https://schema.org",
@@ -22,6 +29,7 @@ const jsonLd = [
     url: siteUrl,
     inLanguage: "en-US",
     description,
+    image: imageUrl,
   },
   {
     "@context": "https://schema.org",
@@ -31,6 +39,7 @@ const jsonLd = [
     applicationCategory: "LifestyleApplication",
     operatingSystem: "Any",
     isAccessibleForFree: true,
+    image: imageUrl,
     audience: {
       "@type": "PeopleAudience",
       suggestedMinAge: 18,
@@ -56,9 +65,43 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+<BaseLayout
+  title={title}
+  description={description}
+  image={image.socialSrc}
+  imageAlt={image.alt}
+  jsonLd={jsonLd}
+>
   <SiteHeader />
   <main id="main">
+    <section class="bg-[color:var(--paper)] py-12 sm:py-16" aria-labelledby="page-title">
+      <div class="mx-auto grid max-w-6xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+        <div>
+          <p class="text-sm font-bold uppercase text-[color:var(--coral)]">Private adult self-reflection</p>
+          <h1 id="page-title" class="mt-3 text-4xl font-black leading-tight text-[color:var(--ink)] sm:text-5xl">
+            A private kink test for clearer boundaries and better conversations.
+          </h1>
+          <p class="mt-5 text-lg leading-8 text-[color:var(--muted)]">
+            Explore six broad preference themes with a non-graphic, consent-first quiz.
+            Your answers are scored locally in your browser.
+          </p>
+          <a
+            href="#test"
+            class="mt-7 inline-flex rounded-md bg-[color:var(--teal)] px-5 py-3 text-sm font-bold text-white"
+          >
+            Start the 24-question test
+          </a>
+        </div>
+        <ContentImage
+          src={image.src}
+          alt={image.alt}
+          loading="eager"
+          fetchpriority="high"
+          class="h-auto w-full rounded-lg border border-[color:var(--line)] bg-white shadow-[0_18px_60px_rgba(38,34,31,0.08)]"
+        />
+      </div>
+    </section>
+
     <Quiz />
 
     <section class="bg-[color:var(--paper)] py-14 sm:py-16" aria-labelledby="why-title">
@@ -109,13 +152,20 @@ const jsonLd = [
             guides.map((guide) => (
               <a
                 href={`/guides/${guide.slug}/`}
-                class="group rounded-md border border-[color:var(--line)] bg-[color:var(--paper)] p-5 transition hover:border-[color:var(--teal)] hover:bg-white"
+                class="group overflow-hidden rounded-md border border-[color:var(--line)] bg-[color:var(--paper)] transition hover:border-[color:var(--teal)] hover:bg-white"
               >
-                <p class="text-xs font-bold uppercase text-[color:var(--coral)]">{guide.data.category}</p>
-                <h3 class="mt-3 text-lg font-black leading-snug text-[color:var(--ink)] group-hover:text-[color:var(--teal-dark)]">
-                  {guide.data.title}
-                </h3>
-                <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{guide.data.description}</p>
+                <ContentImage
+                  src={guide.data.image.src}
+                  alt=""
+                  class="aspect-[1200/630] h-auto w-full border-b border-[color:var(--line)] object-cover"
+                />
+                <div class="p-5">
+                  <p class="text-xs font-bold uppercase text-[color:var(--coral)]">{guide.data.category}</p>
+                  <h3 class="mt-3 text-lg font-black leading-snug text-[color:var(--ink)] group-hover:text-[color:var(--teal-dark)]">
+                    {guide.data.title}
+                  </h3>
+                  <p class="mt-3 text-sm leading-6 text-[color:var(--muted)]">{guide.data.description}</p>
+                </div>
               </a>
             ))
           }

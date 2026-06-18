@@ -4,6 +4,10 @@ description: "Use your kink test result as a reflection map with scores, themes,
 category: "Results"
 pubDate: "2026-06-17"
 order: 3
+image:
+  src: "/images/how-to-read-results.svg"
+  socialSrc: "/images/how-to-read-results.png"
+  alt: "Kink test radar chart annotated with strongest themes, lower priorities, boundaries, and conversation notes."
 ---
 
 Your kink test result is a map, not a verdict. The strongest dimensions show themes that may deserve attention. Lower dimensions can be just as useful because they point toward areas that may be private, situational, or unimportant to you right now.

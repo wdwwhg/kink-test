@@ -5,7 +5,8 @@ interface Props {
   title: string;
   description: string;
   canonicalPath?: string;
-  image?: string;
+  image: string;
+  imageAlt: string;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   bodyClass?: string;
   robots?: string;
@@ -15,7 +16,8 @@ const {
   title,
   description,
   canonicalPath = "/",
-  image = "/og-image.svg",
+  image,
+  imageAlt,
   jsonLd = [],
   bodyClass = "",
   robots = "index, follow, max-image-preview:large",
@@ -43,10 +45,15 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={imageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:type" content="image/png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={imageAlt} />
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0WMYJDTP5G"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];

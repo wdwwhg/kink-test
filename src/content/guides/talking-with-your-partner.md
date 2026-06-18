@@ -4,6 +4,10 @@ description: "Turn kink test results into a consent-first partner conversation w
 category: "Communication"
 pubDate: "2026-06-17"
 order: 4
+image:
+  src: "/images/talking-with-your-partner.svg"
+  socialSrc: "/images/talking-with-your-partner.png"
+  alt: "Two overlapping speech bubbles organizing kink test themes into curious, not now, and off-limits."
 ---
 
 Sharing a kink test result can be vulnerable. The goal is not to surprise someone with a list of demands. The goal is to open a careful adult conversation about curiosity, comfort, and boundaries.

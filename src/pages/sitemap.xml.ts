@@ -6,6 +6,9 @@ export function GET() {
       "  <sitemap>",
       "    <loc>https://kinktest.xyz/sitemap-0.xml</loc>",
       "  </sitemap>",
+      "  <sitemap>",
+      "    <loc>https://kinktest.xyz/image-sitemap.xml</loc>",
+      "  </sitemap>",
       "</sitemapindex>",
     ].join("\n"),
     {

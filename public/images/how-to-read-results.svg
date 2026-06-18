@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#fffaf4"/>
+  <rect x="52" y="42" width="1096" height="546" rx="28" fill="#ffffff" stroke="#ded5ca" stroke-width="4"/>
+  <g transform="translate(385 315)" fill="none">
+    <circle r="216" fill="#f7eee4"/>
+    <polygon points="0,-164 142,-82 142,82 0,164 -142,82 -142,-82" stroke="#ded5ca" stroke-width="5"/>
+    <polygon points="0,-108 94,-54 94,54 0,108 -94,54 -94,-54" stroke="#ded5ca" stroke-width="4"/>
+    <path d="M0-164V164M-142-82L142 82M142-82L-142 82" stroke="#ded5ca" stroke-width="3"/>
+    <polygon points="0,-134 119,-69 76,44 0,86 -63,36 -101,-58" fill="#0f766e" fill-opacity=".25" stroke="#0f766e" stroke-width="7"/>
+    <g fill="#d45d4c">
+      <circle cy="-134" r="9"/><circle cx="119" cy="-69" r="9"/><circle cx="76" cy="44" r="9"/>
+      <circle cy="86" r="9"/><circle cx="-63" cy="36" r="9"/><circle cx="-101" cy="-58" r="9"/>
+    </g>
+  </g>
+  <g transform="translate(688 130)">
+    <g fill="#ffffff" stroke="#ded5ca" stroke-width="4">
+      <rect width="380" height="96" rx="20"/><rect y="126" width="380" height="96" rx="20"/><rect y="252" width="380" height="96" rx="20"/>
+    </g>
+    <circle cx="50" cy="48" r="20" fill="#d45d4c"/>
+    <rect x="92" y="32" width="224" height="12" rx="6" fill="#665f57"/>
+    <rect x="92" y="55" width="152" height="10" rx="5" fill="#ded5ca"/>
+    <circle cx="50" cy="174" r="20" fill="#0f766e"/>
+    <rect x="92" y="158" width="190" height="12" rx="6" fill="#665f57"/>
+    <rect x="92" y="181" width="246" height="10" rx="5" fill="#ded5ca"/>
+    <circle cx="50" cy="300" r="20" fill="#b78a1f"/>
+    <rect x="92" y="284" width="242" height="12" rx="6" fill="#665f57"/>
+    <rect x="92" y="307" width="128" height="10" rx="5" fill="#ded5ca"/>
+  </g>
+  <path d="M548 204l120-40M570 315h98M548 426l120 40" fill="none" stroke="#b9aaa0" stroke-width="4" stroke-dasharray="10 10"/>
+</svg>

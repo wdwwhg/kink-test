@@ -4,6 +4,10 @@ description: "Aftercare is not only for scenes. Learn how reassurance, reflectio
 category: "Care"
 pubDate: "2026-06-17"
 order: 8
+image:
+  src: "/images/aftercare-basics.svg"
+  socialSrc: "/images/aftercare-basics.png"
+  alt: "Four-part aftercare illustration showing reassurance, space, reflection, and repair after a vulnerable conversation."
 ---
 
 Aftercare is often discussed after intense experiences, but it can also matter after a vulnerable conversation. Sharing a kink test result may bring up excitement, embarrassment, fear, relief, or uncertainty. A little care afterward can protect trust.

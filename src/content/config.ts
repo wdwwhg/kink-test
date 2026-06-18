@@ -9,6 +9,11 @@ const guides = defineCollection({
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
     order: z.number(),
+    image: z.object({
+      src: z.string().regex(/^\/images\/[a-z0-9-]+\.svg$/),
+      socialSrc: z.string().regex(/^\/images\/[a-z0-9-]+\.png$/),
+      alt: z.string().min(40).max(180),
+    }),
   }),
 });
 

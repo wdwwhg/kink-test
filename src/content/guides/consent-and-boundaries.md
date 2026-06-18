@@ -4,6 +4,10 @@ description: "A kink test result is only useful when it is paired with clear con
 category: "Safety"
 pubDate: "2026-06-17"
 order: 5
+image:
+  src: "/images/consent-and-boundaries.svg"
+  socialSrc: "/images/consent-and-boundaries.png"
+  alt: "Consent choices—yes, no, slow down, pause, and stop—shown inside clear personal boundary lines."
 ---
 
 Consent is the foundation of any adult exploration. A kink test can help you identify themes, but it cannot create consent. Consent must be specific, informed, reversible, and freely given.

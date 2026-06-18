@@ -4,6 +4,10 @@ description: "A kink test is a private reflection tool for adults who want langu
 category: "Basics"
 pubDate: "2026-06-17"
 order: 1
+image:
+  src: "/images/what-is-a-kink-test.svg"
+  socialSrc: "/images/what-is-a-kink-test.png"
+  alt: "Reflection map connecting adult preferences, personal boundaries, and consent-first conversation prompts."
 ---
 
 A kink test is a structured way to reflect on adult interests before talking about them with another person. A good test does not tell you who you are forever, rank your worth, or turn curiosity into an obligation. It gives you language for patterns that may be worth discussing.
