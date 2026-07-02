@@ -255,6 +255,7 @@ async function verifyViewport(client, width, height, label) {
       'www.google-analytics.com',
       'region1.google-analytics.com',
       'analytics.google.com',
+      'analytics.ahrefs.com',
     ]);
     const unexpectedExternalResources = externalResources.filter((name) => {
       const url = new URL(name);

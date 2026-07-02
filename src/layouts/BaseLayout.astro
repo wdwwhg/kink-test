@@ -61,6 +61,7 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : [jsonLd];
       gtag('js', new Date());
       gtag('config', 'G-0WMYJDTP5G');
     </script>
+    <script is:inline src="https://analytics.ahrefs.com/analytics.js" data-key="IqVVdmyuERI4m218fH1U5A" async></script>
     {
       schemas.map((schema) => (
         <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />

@@ -14,7 +14,7 @@ Privacy matters because kink test answers can feel personal even when the questi
 
 The safest simple approach is local scoring. That means the page calculates your result in your browser instead of sending answers to a server account or saved profile. This site uses local-only scoring for the quiz experience.
 
-This site may use Google Analytics to understand aggregate page use. The quiz answers themselves are not submitted, saved to an account, or attached to a report.
+This site may use Google Analytics and Ahrefs Analytics to understand aggregate page use. The quiz answers themselves are not submitted, saved to an account, or attached to a report.
 
 ## Privacy signals to check
 

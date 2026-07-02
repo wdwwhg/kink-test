@@ -28,6 +28,10 @@ for (const file of htmlFiles) {
   const describedImages = imageTags.filter((tag) => /\salt="[^"]+"/.test(tag));
   const hasGoogleAnalyticsTag = html.includes("https://www.googletagmanager.com/gtag/js?id=G-0WMYJDTP5G") &&
     html.includes("gtag('config', 'G-0WMYJDTP5G')");
+  const hasAhrefsAnalyticsTag =
+    html.includes('src="https://analytics.ahrefs.com/analytics.js"') &&
+    html.includes('data-key="IqVVdmyuERI4m218fH1U5A"') &&
+    html.includes("async");
 
   assert(h1Count === 1, `${name}: expected exactly one H1, found ${h1Count}.`);
   assert(/<title>[^<]+<\/title>/.test(html), `${name}: missing title.`);
@@ -65,6 +69,7 @@ for (const file of htmlFiles) {
     `${name}: expected at least two JSON-LD blocks.`,
   );
   assert(hasGoogleAnalyticsTag, `${name}: missing Google Analytics tag.`);
+  assert(hasAhrefsAnalyticsTag, `${name}: missing Ahrefs Analytics tag.`);
 
   if (isHome) {
     assert(imageTags.length === 9, `${name}: expected one primary image and eight guide thumbnails.`);
